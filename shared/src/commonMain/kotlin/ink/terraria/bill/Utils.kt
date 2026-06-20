@@ -1,7 +1,5 @@
 package ink.terraria.bill
 
-import bill.shared.generated.resources.Res
-import bill.shared.generated.resources.icon
 import ink.terraria.bill.model.Bill
 import java.time.Year
 import java.time.YearMonth
@@ -27,5 +25,3 @@ fun isSameYear(bill: Bill, bill2: Bill): Boolean {
         bill.time.toJavaInstant().atZone(zone)
     ) == Year.from(bill2.time.toJavaInstant().atZone(zone))
 }
-
-val iconRes = Res.drawable.icon
