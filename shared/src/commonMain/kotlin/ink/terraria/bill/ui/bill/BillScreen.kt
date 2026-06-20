@@ -54,7 +54,6 @@ import ink.terraria.bill.ui.TagIcon
 import ink.terraria.bill.ui.TimeText
 import ink.terraria.bill.ui.Title
 import ink.terraria.bill.ui.navigation.NavigationDestination
-import ink.terraria.bill.ui.navigationBar.BillNavigationBar
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import java.time.ZoneId

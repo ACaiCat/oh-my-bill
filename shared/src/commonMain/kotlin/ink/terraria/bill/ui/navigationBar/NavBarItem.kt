@@ -4,9 +4,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalanceWallet
 import androidx.compose.material.icons.filled.AttachMoney
 import androidx.compose.material.icons.filled.BarChart
-import androidx.compose.material.icons.filled.Book
-import androidx.compose.material.icons.filled.LibraryAdd
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 import bill.shared.generated.resources.Res
 import bill.shared.generated.resources.bill

@@ -14,12 +14,12 @@ data class StatisticScreenUiState(
     val selectedLedgerId: Int? = null,
     val selectedMonth: LocalDate = Clock.System.now()
         .toLocalDateTime(TimeZone.currentSystemDefault()).date.let {
-        LocalDate(
-            it.year,
-            it.month,
-            1
-        )
-    },
+            LocalDate(
+                it.year,
+                it.month,
+                1
+            )
+        },
     val income: BigDecimal = BigDecimal.ZERO,
     val expenditure: BigDecimal = BigDecimal.ZERO,
     val tagBills: List<TagBill> = emptyList(),
