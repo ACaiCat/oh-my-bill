@@ -54,7 +54,6 @@ import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.TagText
 import ink.terraria.bill.ui.Title
 import ink.terraria.bill.ui.navigation.NavigationDestination
-import ink.terraria.bill.ui.navigationBar.BillNavigationBar
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
 import kotlinx.datetime.number
@@ -155,7 +154,10 @@ fun StatisticCard(income: BigDecimal, expenditure: BigDecimal, modifier: Modifie
                 )
                 Spacer(modifier = Modifier.padding(end = 16.dp))
                 Text(
-                    text = stringResource(Res.string.statistic_expenditure_format, expenditure.toString()),
+                    text = stringResource(
+                        Res.string.statistic_expenditure_format,
+                        expenditure.toString()
+                    ),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.error,
                 )

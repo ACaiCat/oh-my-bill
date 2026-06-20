@@ -41,7 +41,6 @@ import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.SwipeToDeleteContainer
 import ink.terraria.bill.ui.Title
 import ink.terraria.bill.ui.navigation.NavigationDestination
-import ink.terraria.bill.ui.navigationBar.BillNavigationBar
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 
