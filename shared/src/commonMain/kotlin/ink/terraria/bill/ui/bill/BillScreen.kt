@@ -16,6 +16,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -29,7 +30,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import bill.shared.generated.resources.Res
 import bill.shared.generated.resources.add_bill
 import bill.shared.generated.resources.app_name
@@ -47,6 +51,7 @@ import ink.terraria.bill.model.NewBillInput
 import ink.terraria.bill.ui.AmountSection
 import ink.terraria.bill.ui.BillAppBar
 import ink.terraria.bill.ui.BillNote
+import ink.terraria.bill.ui.BottomEndTip
 import ink.terraria.bill.ui.DeleteConfirmationDialog
 import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.SwipeToDeleteContainer
@@ -197,7 +202,7 @@ fun BillList(
         }
 
         item {
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
+            BottomEndTip()
         }
     }
 }

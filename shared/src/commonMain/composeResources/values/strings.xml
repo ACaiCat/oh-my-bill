@@ -64,4 +64,5 @@
     <string name="statistic_income_format">收入 ￥%1$s</string>
     <string name="statistic_expenditure_format">支出 ￥%1$s</string>
     <string name="empty">这里啥都没有...</string>
+    <string name="bottom_tip">已经滑到底啦~</string>
 </resources>

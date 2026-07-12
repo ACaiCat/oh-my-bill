@@ -14,6 +14,7 @@ import androidx.compose.foundation.gestures.snapTo
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
@@ -25,6 +26,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -46,10 +48,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import bill.shared.generated.resources.Res
 import bill.shared.generated.resources.balance
+import bill.shared.generated.resources.bottom_tip
 import bill.shared.generated.resources.cancel
 import bill.shared.generated.resources.confirm
 import bill.shared.generated.resources.confirm_delete
@@ -304,5 +309,22 @@ fun EmptyList(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .align(Alignment.Center)
         )
+    }
+}
+
+@Composable
+fun BottomEndTip(
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
+        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+        Text(
+            text = stringResource(Res.string.bottom_tip),
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        Spacer(modifier = Modifier.padding(vertical = 24.dp))
     }
 }

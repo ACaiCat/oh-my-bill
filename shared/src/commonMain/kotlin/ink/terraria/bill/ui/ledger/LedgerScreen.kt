@@ -36,6 +36,7 @@ import bill.shared.generated.resources.ledger
 import ink.terraria.bill.model.Ledger
 import ink.terraria.bill.model.NewLedgerInput
 import ink.terraria.bill.ui.AmountText
+import ink.terraria.bill.ui.BottomEndTip
 import ink.terraria.bill.ui.DeleteConfirmationDialog
 import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.SwipeToDeleteContainer
@@ -155,7 +156,7 @@ fun LedgerList(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(vertical = 8.dp))
+            BottomEndTip()
         }
     }
 }
