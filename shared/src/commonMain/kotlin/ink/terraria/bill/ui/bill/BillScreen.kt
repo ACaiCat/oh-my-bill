@@ -216,10 +216,9 @@ fun MonthHeader(time: Instant, showYear: Boolean, modifier: Modifier = Modifier)
             Res.string.date_M
         }
     )
-    val formatter = remember {
-        DateTimeFormatter.ofPattern(datePattern)
-            .withZone(ZoneId.systemDefault())
-    }
+    val formatter = DateTimeFormatter.ofPattern(datePattern)
+        .withZone(ZoneId.systemDefault())
+
     Box(
         modifier = modifier
     ) {
@@ -234,10 +233,8 @@ fun MonthHeader(time: Instant, showYear: Boolean, modifier: Modifier = Modifier)
 @Composable
 fun DateHeader(time: Instant, modifier: Modifier = Modifier) {
     val datePattern = stringResource(Res.string.date_MM_dd)
-    val formatter = remember {
-        DateTimeFormatter.ofPattern(datePattern)
-            .withZone(ZoneId.systemDefault())
-    }
+    val formatter = DateTimeFormatter.ofPattern(datePattern)
+        .withZone(ZoneId.systemDefault())
     Badge(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
