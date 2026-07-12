@@ -60,6 +60,7 @@ import kotlinx.datetime.number
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 object StatisticDestination : NavigationDestination {
     override val route: String = "statistic"
@@ -136,7 +137,7 @@ fun StatisticScreen(
 @Composable
 fun StatisticCard(income: BigDecimal, expenditure: BigDecimal, modifier: Modifier = Modifier) {
     Card(
-        modifier = modifier,
+        modifier = modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -148,7 +149,7 @@ fun StatisticCard(income: BigDecimal, expenditure: BigDecimal, modifier: Modifie
             Spacer(modifier = Modifier.padding(top = 8.dp))
             Row {
                 Text(
-                    text = stringResource(Res.string.statistic_income_format, income.toString()),
+                    text = stringResource(Res.string.statistic_income_format, income.setScale(2, RoundingMode.HALF_DOWN).toString()),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.primary,
                 )
@@ -156,7 +157,7 @@ fun StatisticCard(income: BigDecimal, expenditure: BigDecimal, modifier: Modifie
                 Text(
                     text = stringResource(
                         Res.string.statistic_expenditure_format,
-                        expenditure.toString()
+                        expenditure.setScale(2, RoundingMode.HALF_DOWN).toString()
                     ),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.error,

@@ -59,6 +59,7 @@ import bill.shared.generated.resources.empty
 import ink.terraria.bill.model.BillTag
 import org.jetbrains.compose.resources.stringResource
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import kotlin.math.roundToInt
@@ -116,7 +117,7 @@ fun AmountText(amount: BigDecimal, headLine: Boolean = false, showSignal: Boolea
             append(if (isIncome) "+" else "-")
         }
         append("￥")
-        append(amount.abs().toString())
+        append(amount.abs().setScale(2, RoundingMode.HALF_DOWN).toString())
     }
 
     Text(
