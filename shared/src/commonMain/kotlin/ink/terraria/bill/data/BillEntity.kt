@@ -9,7 +9,6 @@ data class BillEntity(
     val ledgerId: Int,
     val title: String,
     val amount: String,
-    val balance: String,
     val tagId: Int,
     val note: String,
     val timeEpochMillis: Long,

@@ -20,6 +20,7 @@ data class StatisticScreenUiState(
                 1
             )
         },
+    val balance: BigDecimal = BigDecimal.ZERO,
     val income: BigDecimal = BigDecimal.ZERO,
     val expenditure: BigDecimal = BigDecimal.ZERO,
     val tagBills: List<TagBill> = emptyList(),

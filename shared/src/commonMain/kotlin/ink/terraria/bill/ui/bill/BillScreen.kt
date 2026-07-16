@@ -98,6 +98,7 @@ fun BillScreen(
             BillAppBar(
                 ledgers = uiState.ledgers,
                 selectLedgerId = uiState.selectedLedgerId,
+                balance = uiState.balance,
                 onSelectLedgerClick = onSelectLedgerClick,
                 scrollBehavior = scrollBehavior
             )
@@ -181,6 +182,7 @@ fun BillList(
         EmptyList()
         return
     }
+
     val listState = rememberLazyListState()
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),

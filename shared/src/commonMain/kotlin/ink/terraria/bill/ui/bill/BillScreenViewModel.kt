@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
+import java.math.BigDecimal
 
 class BillScreenViewModel(
     private val database: BillDatabase,
@@ -41,9 +42,17 @@ class BillScreenViewModel(
                     selectedLedgerId.value = effectiveLedgerId
                 }
 
+                val currentLedger = ledgers.find { ledger -> ledger.id == effectiveLedgerId }
+                val currentBalance = effectiveLedgerId?.let { ledgerId ->
+                    val initialBalance = currentLedger?.balance ?: BigDecimal.ZERO
+                    val allBills = bills.filter { it.ledgerId == ledgerId }
+                    initialBalance + allBills.fold(BigDecimal.ZERO) { total, bill -> total + bill.amount }
+                } ?: BigDecimal.ZERO
+
                 BillScreenUiState(
                     isLoading = false,
                     ledgers = ledgers,
+                    balance = currentBalance,
                     selectedLedgerId = effectiveLedgerId,
                     bills = effectiveLedgerId?.let { ledgerId ->
                         bills.filter { it.ledgerId == ledgerId }.sortedByDescending(Bill::time)
@@ -80,6 +89,5 @@ class BillScreenViewModel(
 
     override fun onCleared() {
         scope.cancel()
-        super.onCleared()
     }
 }

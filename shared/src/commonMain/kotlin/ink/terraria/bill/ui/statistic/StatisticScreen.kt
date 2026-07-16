@@ -82,6 +82,7 @@ fun StatisticScreen(
                 ledgers = uiState.ledgers,
                 selectLedgerId = uiState.selectedLedgerId,
                 onSelectLedgerClick = onSelectLedgerClick,
+                balance = uiState.balance,
                 scrollBehavior = scrollBehavior
             )
         },

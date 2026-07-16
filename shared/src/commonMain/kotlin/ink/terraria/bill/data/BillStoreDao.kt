@@ -77,20 +77,16 @@ interface BillStoreDao {
         ledgerId: Int,
         input: NewBillInput,
     ) {
-        val ledger = getLedgerById(ledgerId) ?: error("Ledger $ledgerId does not exist")
-        val nextBalance = ledger.balance.toBigDecimal() + input.amount
         insertBill(
             BillEntity(
                 ledgerId = ledgerId,
                 title = input.title,
                 amount = input.amount.toPlainString(),
-                balance = nextBalance.toPlainString(),
                 tagId = input.tagId,
                 note = input.note,
                 timeEpochMillis = input.time.toEpochMilliseconds(),
             )
         )
-        updateLedger(ledger.copy(balance = nextBalance.toPlainString()))
     }
 
     suspend fun addLedger(input: NewLedgerInput) {

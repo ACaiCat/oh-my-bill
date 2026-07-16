@@ -41,11 +41,11 @@ import java.math.BigDecimal
 fun BillAppBar(
     ledgers: List<Ledger>,
     selectLedgerId: Int?,
+    balance: BigDecimal,
     onSelectLedgerClick: (Int) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier
 ) {
-    val currentLedger = ledgers.find { ledger -> ledger.id == selectLedgerId }
     TopAppBar(
         title = {
             AppBarTitle(
@@ -56,8 +56,7 @@ fun BillAppBar(
         },
         subtitle = {
             Text(
-                text = (currentLedger?.balance
-                    ?: BigDecimal.ZERO).toString() + stringResource(Res.string.yuan),
+                text = balance.toString() + stringResource(Res.string.yuan),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
