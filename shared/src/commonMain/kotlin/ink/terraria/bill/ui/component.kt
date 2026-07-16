@@ -110,7 +110,7 @@ fun BillNote(note: String) {
 fun AmountSection(amount: BigDecimal, balance: BigDecimal) {
     Column(horizontalAlignment = Alignment.End) {
         AmountText(amount = amount)
-        TagText("${stringResource(Res.string.balance)}${balance}")
+        TagText("${stringResource(Res.string.balance)}${balance.setScale(2, RoundingMode.HALF_DOWN)}")
     }
 }
 

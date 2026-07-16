@@ -35,6 +35,7 @@ import bill.shared.generated.resources.yuan
 import ink.terraria.bill.model.Ledger
 import org.jetbrains.compose.resources.stringResource
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -56,7 +57,7 @@ fun BillAppBar(
         },
         subtitle = {
             Text(
-                text = balance.toString() + stringResource(Res.string.yuan),
+                text = balance.setScale(2, RoundingMode.HALF_DOWN).toString() + stringResource(Res.string.yuan),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
