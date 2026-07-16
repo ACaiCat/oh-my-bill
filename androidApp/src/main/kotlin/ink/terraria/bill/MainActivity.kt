@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import ink.terraria.bill.data.buildBillDatabase
 import ink.terraria.bill.data.init
 import ink.terraria.bill.ui.bill.BillScreenViewModel
@@ -23,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val windowSizeClass = calculateWindowSizeClass(this)
             val database = remember { buildBillDatabase() }
-            val selectedLedgerId = remember { MutableStateFlow<Int?>(null) }
+            val selectedLedgerId = rememberSaveable(saver = nullableIntFlowSaver) { MutableStateFlow<Int?>(null) }
             val billScreenViewModel = remember { BillScreenViewModel(database, selectedLedgerId) }
             val statisticScreenViewModel = remember {
                 StatisticScreenViewModel(database, selectedLedgerId)
