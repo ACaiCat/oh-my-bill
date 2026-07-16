@@ -9,7 +9,7 @@ import androidx.room.RoomDatabaseConstructor
 
 @Database(
     entities = [LedgerEntity::class, BillEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = true,
 )
 

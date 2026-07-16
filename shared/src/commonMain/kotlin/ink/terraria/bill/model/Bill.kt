@@ -9,7 +9,7 @@ data class Bill(
     val ledgerId: Int,
     val title: String,
     val amount: BigDecimal,
-    val balance: BigDecimal,
+    var balance: BigDecimal = BigDecimal.ZERO,
     val tagId: Int,
     val note: String,
     val time: Instant = Clock.System.now()

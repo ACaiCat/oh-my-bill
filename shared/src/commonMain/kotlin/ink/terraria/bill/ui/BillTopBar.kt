@@ -35,17 +35,18 @@ import bill.shared.generated.resources.yuan
 import ink.terraria.bill.model.Ledger
 import org.jetbrains.compose.resources.stringResource
 import java.math.BigDecimal
+import java.math.RoundingMode
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BillAppBar(
     ledgers: List<Ledger>,
     selectLedgerId: Int?,
+    balance: BigDecimal,
     onSelectLedgerClick: (Int) -> Unit,
     scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier
 ) {
-    val currentLedger = ledgers.find { ledger -> ledger.id == selectLedgerId }
     TopAppBar(
         title = {
             AppBarTitle(
@@ -56,8 +57,7 @@ fun BillAppBar(
         },
         subtitle = {
             Text(
-                text = (currentLedger?.balance
-                    ?: BigDecimal.ZERO).toString() + stringResource(Res.string.yuan),
+                text = balance.setScale(2, RoundingMode.HALF_DOWN).toString() + stringResource(Res.string.yuan),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )

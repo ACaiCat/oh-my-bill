@@ -52,6 +52,13 @@ class StatisticScreenViewModel(
                     selectedLedgerId.value = effectiveLedgerId
                 }
 
+                val currentLedger = ledgers.find { ledger -> ledger.id == effectiveLedgerId }
+                val currentBalance = effectiveLedgerId?.let { ledgerId ->
+                    val initialBalance = currentLedger?.balance ?: BigDecimal.ZERO
+                    val allBills = bills.filter { it.ledgerId == ledgerId }
+                    initialBalance + allBills.fold(BigDecimal.ZERO) { total, bill -> total + bill.amount }
+                } ?: BigDecimal.ZERO
+
                 val selectedBills = effectiveLedgerId?.let { ledgerId ->
                     bills.filter {
                         it.ledgerId == ledgerId &&
@@ -62,12 +69,12 @@ class StatisticScreenViewModel(
                     }
                 } ?: emptyList()
                 val expenseBills = selectedBills.filter { it.amount < BigDecimal.ZERO }
-
                 StatisticScreenUiState(
                     isLoading = false,
                     ledgers = ledgers,
                     selectedLedgerId = effectiveLedgerId,
                     selectedMonth = currentSelectedMonth,
+                    balance = currentBalance,
                     income = selectedBills
                         .filter { it.amount > BigDecimal.ZERO }
                         .fold(BigDecimal.ZERO) { total, bill -> total + bill.amount },
