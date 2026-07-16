@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Badge
@@ -180,9 +181,10 @@ fun BillList(
         EmptyList()
         return
     }
-
+    val listState = rememberLazyListState()
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        state = listState,
         modifier = modifier
     ) {
         itemsIndexed(uiState.bills, key = { _, bill -> bill.id }) { index, bill ->
@@ -202,7 +204,9 @@ fun BillList(
         }
 
         item {
-            BottomEndTip()
+            if (listState.canScrollBackward) {
+                BottomEndTip()
+            }
         }
     }
 }
