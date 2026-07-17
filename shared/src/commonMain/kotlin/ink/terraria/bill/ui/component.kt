@@ -225,6 +225,7 @@ enum class DragAnchor { Default, Revealed }
 @Composable
 fun SwipeToDeleteContainer(
     onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     val dragState = remember {
@@ -247,7 +248,7 @@ fun SwipeToDeleteContainer(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .onSizeChanged { size ->
                 val maxDrag = -size.width.toFloat() * 0.4f

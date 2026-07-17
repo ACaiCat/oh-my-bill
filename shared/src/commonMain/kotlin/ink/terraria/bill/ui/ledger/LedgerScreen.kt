@@ -156,7 +156,7 @@ fun LedgerList(
         modifier = modifier
     ) {
         items(ledgers, key = { it.id }) { ledger ->
-            SwipeToDeleteContainer(onDelete = { onLedgerDelete(ledger) }) {
+            SwipeToDeleteContainer(onDelete = { onLedgerDelete(ledger) }, modifier = Modifier.animateItem()) {
                 LedgerItem(ledger, onClick = { onLedgerClick(ledger) })
             }
         }
