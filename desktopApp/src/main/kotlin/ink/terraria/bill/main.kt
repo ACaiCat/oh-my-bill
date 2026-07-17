@@ -3,6 +3,7 @@ package ink.terraria.bill
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import bill.desktopapp.generated.resources.Res
@@ -25,7 +26,7 @@ fun main() = application {
     ) {
         val windowSizeClass = calculateWindowSizeClass()
         val database = remember { buildBillDatabase() }
-        val selectedLedgerId = remember { MutableStateFlow<Int?>(null) }
+        val selectedLedgerId = rememberSaveable(saver = nullableIntFlowSaver) { MutableStateFlow<Int?>(null) }
         val billScreenViewModel = remember { BillScreenViewModel(database, selectedLedgerId) }
         val statisticScreenViewModel =
             remember { StatisticScreenViewModel(database, selectedLedgerId) }
