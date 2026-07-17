@@ -25,7 +25,7 @@ compose.desktop {
             modules("java.base", "java.desktop", "java.net.http")
             targetFormats(TargetFormat.Msi)
             packageName = "Oh My Bill"
-            packageVersion = "2.0.0"
+            packageVersion = "2.1.0"
 
             windows {
                 iconFile.set(project.file("src/main/resources/icon.ico"))
