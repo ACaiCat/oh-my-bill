@@ -311,20 +311,3 @@ fun EmptyList(modifier: Modifier = Modifier) {
         )
     }
 }
-
-@Composable
-fun BottomEndTip(
-    modifier: Modifier = Modifier
-) {
-    Column(modifier) {
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-        Text(
-            text = stringResource(Res.string.bottom_tip),
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Spacer(modifier = Modifier.padding(vertical = 24.dp))
-    }
-}

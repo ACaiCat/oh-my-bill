@@ -2,6 +2,7 @@ package ink.terraria.bill.ui.ledger
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,7 +39,6 @@ import bill.shared.generated.resources.ledger
 import ink.terraria.bill.model.Ledger
 import ink.terraria.bill.model.NewLedgerInput
 import ink.terraria.bill.ui.AmountText
-import ink.terraria.bill.ui.BottomEndTip
 import ink.terraria.bill.ui.DeleteConfirmationDialog
 import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.SwipeToDeleteContainer
@@ -151,17 +151,13 @@ fun LedgerList(
     val listState = rememberLazyListState()
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(bottom = 100.dp),
         state = listState,
         modifier = modifier
     ) {
         items(ledgers, key = { it.id }) { ledger ->
             SwipeToDeleteContainer(onDelete = { onLedgerDelete(ledger) }) {
                 LedgerItem(ledger, onClick = { onLedgerClick(ledger) })
-            }
-        }
-        item {
-            if (listState.canScrollBackward) {
-                BottomEndTip()
             }
         }
     }
