@@ -43,20 +43,21 @@ class BillScreenViewModel(
                 }
 
                 val currentLedger = ledgers.find { ledger -> ledger.id == effectiveLedgerId }
-                val currentBalance = effectiveLedgerId?.let { ledgerId ->
-                    val initialBalance = currentLedger?.balance ?: BigDecimal.ZERO
-                    val allBills = bills.filter { it.ledgerId == ledgerId }
-                    initialBalance + allBills.fold(BigDecimal.ZERO) { total, bill -> total + bill.amount }
-                } ?: BigDecimal.ZERO
+                var currentBalance = currentLedger?.balance ?: BigDecimal.ZERO
+                var currentBills = effectiveLedgerId?.let { ledgerId ->
+                    bills.filter { it.ledgerId == ledgerId }.sortedByDescending(Bill::time)
+                } ?: emptyList()
+                for (i in currentBills.reversed()) {
+                    currentBalance += i.amount
+                    i.balance = currentBalance
+                }
 
                 BillScreenUiState(
                     isLoading = false,
                     ledgers = ledgers,
                     balance = currentBalance,
                     selectedLedgerId = effectiveLedgerId,
-                    bills = effectiveLedgerId?.let { ledgerId ->
-                        bills.filter { it.ledgerId == ledgerId }.sortedByDescending(Bill::time)
-                    } ?: emptyList(),
+                    bills = currentBills,
                 )
             }.collect { state ->
                 _uiState.value = state

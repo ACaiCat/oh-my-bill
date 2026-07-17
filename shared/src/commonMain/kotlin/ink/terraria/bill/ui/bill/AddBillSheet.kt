@@ -157,7 +157,7 @@ internal fun AddBillSheetContent(
     var selectedDateTime by remember {
         mutableStateOf(
             bill?.time?.toJavaInstant()?.atZone(zoneId)?.toLocalDateTime()
-                ?: LocalDateTime.now().withSecond(0).withNano(0)
+                ?: LocalDateTime.now()
         )
     }
     val scrollState = rememberScrollState()

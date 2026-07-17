@@ -110,7 +110,7 @@ fun BillNote(note: String) {
 fun AmountSection(amount: BigDecimal, balance: BigDecimal) {
     Column(horizontalAlignment = Alignment.End) {
         AmountText(amount = amount)
-        TagText("${stringResource(Res.string.balance)}${balance.setScale(2, RoundingMode.HALF_DOWN)}")
+        TagText("${stringResource(Res.string.balance)} ${balance.setScale(2, RoundingMode.HALF_DOWN)}")
     }
 }
 
@@ -225,6 +225,7 @@ enum class DragAnchor { Default, Revealed }
 @Composable
 fun SwipeToDeleteContainer(
     onDelete: () -> Unit,
+    modifier: Modifier = Modifier,
     content: @Composable () -> Unit
 ) {
     val dragState = remember {
@@ -247,7 +248,7 @@ fun SwipeToDeleteContainer(
     }
 
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .onSizeChanged { size ->
                 val maxDrag = -size.width.toFloat() * 0.4f
@@ -309,22 +310,5 @@ fun EmptyList(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .align(Alignment.Center)
         )
-    }
-}
-
-@Composable
-fun BottomEndTip(
-    modifier: Modifier = Modifier
-) {
-    Column(modifier) {
-        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
-        Text(
-            text = stringResource(Res.string.bottom_tip),
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
-        )
-        Spacer(modifier = Modifier.padding(vertical = 24.dp))
     }
 }

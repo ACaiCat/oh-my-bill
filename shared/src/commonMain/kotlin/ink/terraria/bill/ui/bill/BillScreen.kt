@@ -3,11 +3,13 @@ package ink.terraria.bill.ui.bill
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -25,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -52,7 +55,6 @@ import ink.terraria.bill.model.NewBillInput
 import ink.terraria.bill.ui.AmountSection
 import ink.terraria.bill.ui.BillAppBar
 import ink.terraria.bill.ui.BillNote
-import ink.terraria.bill.ui.BottomEndTip
 import ink.terraria.bill.ui.DeleteConfirmationDialog
 import ink.terraria.bill.ui.EmptyList
 import ink.terraria.bill.ui.SwipeToDeleteContainer
@@ -87,7 +89,7 @@ fun BillScreen(
     var showAddBillSheet by remember { mutableStateOf(false) }
     var editingBill by remember { mutableStateOf<Bill?>(null) }
     var billToDelete by remember { mutableStateOf<Bill?>(null) }
-
+    val listState = rememberLazyListState()
     val sheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true
     )
@@ -121,12 +123,20 @@ fun BillScreen(
     ) { paddingValues ->
         BillList(
             uiState = uiState,
+            listState = listState,
             onBillClick = { bill -> editingBill = bill },
             onBillDelete = { bill -> billToDelete = bill },
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(horizontal = 16.dp)
         )
+    }
+
+    val firstBillId = uiState.bills.firstOrNull()?.id
+    LaunchedEffect(firstBillId) {
+        if (firstBillId != null) {
+            listState.animateScrollToItem(0)
+        }
     }
 
     if (showAddBillSheet || editingBill != null) {
@@ -174,6 +184,7 @@ fun BillScreen(
 @Composable
 fun BillList(
     uiState: BillScreenUiState,
+    listState: LazyListState,
     onBillClick: (Bill) -> Unit,
     onBillDelete: (Bill) -> Unit,
     modifier: Modifier = Modifier
@@ -182,10 +193,9 @@ fun BillList(
         EmptyList()
         return
     }
-
-    val listState = rememberLazyListState()
     LazyColumn(
         verticalArrangement = Arrangement.spacedBy(8.dp),
+        contentPadding = PaddingValues(bottom = 100.dp),
         state = listState,
         modifier = modifier
     ) {
@@ -198,16 +208,16 @@ fun BillList(
                 )
             }
             if (index == 0 || !isSameDay(bill, uiState.bills[index - 1])) {
-                DateHeader(time = bill.time, modifier = Modifier.padding(bottom = 4.dp))
+                DateHeader(
+                    time = bill.time,
+                    modifier = Modifier.padding(bottom = 4.dp)
+                )
             }
-            SwipeToDeleteContainer(onDelete = { onBillDelete(bill) }) {
+            SwipeToDeleteContainer(
+                onDelete = { onBillDelete(bill) },
+                modifier = Modifier.animateItem()
+            ) {
                 BillItem(bill, onClick = { onBillClick(bill) })
-            }
-        }
-
-        item {
-            if (listState.canScrollBackward) {
-                BottomEndTip()
             }
         }
     }
